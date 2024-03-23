@@ -33,7 +33,7 @@ class Email:
         port = 465
 
         username = "edmondmulera55@gmail.com"
-        password = "qyciukmocfaiarse"
+        password = "ncwm zxeq xhqm dhyi"
 
         receiver = "edmondmulera55@gmail.com"
         context = ssl.create_default_context()
@@ -45,8 +45,8 @@ class Email:
 
 
 class Database:
-    def __init__(self):
-        self.connection = sqlite3.connect("data.db")
+    def __init__(self, database_path):
+        self.connection = sqlite3.connect(database_path)
 
     def store(self, extracted):
         row = extracted.split(",")
@@ -72,9 +72,8 @@ if __name__ == "__main__":
         scraped = event.scrape(URL)
         extracted = event.extract(scraped)
         print(extracted)
-
         if extracted != "No upcoming tours":
-            database = Database
+            database = Database(database_path="data.db")
             row = database.read(extracted)
             if not row:
                 database.store(extracted)
